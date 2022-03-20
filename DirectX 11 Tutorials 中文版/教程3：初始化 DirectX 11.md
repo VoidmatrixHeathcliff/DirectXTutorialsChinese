@@ -427,7 +427,7 @@ bool D3DClass::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hw
 	}
 ```
 
-现在我们已经存储了刷新率的分子和分母以及视频卡信息，我们可以释放用于获取该信息的结构体和接口。
+现在我们已经存储了刷新率的分子和分母以及显卡信息，我们可以释放用于获取该信息的结构体和接口。
 
 ```cpp
 	// Release the display mode list.
@@ -525,7 +525,7 @@ bool D3DClass::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hw
 
 请注意，如果用户没有支持 DirectX 11 的显卡，此函数调用将无法创建设备和设备上下文。
 
-此外，如果您自己正在测试 DirectX 11 功能，并且没有支持 DirectX 11 的显卡，那么您可以使用 `D3D_DRIVER_TYPE_REFERENCE` 替换 `D3D_DRIVER_TYPE_HARDWARE`，DirectX 将使用您的 CPU 而不是显卡硬件进行绘图。请注意，这会导致运行速度变为使用显卡硬件的 1/1000，但对于那些尚未在机器上安装 DirectX 11 视频卡的人来说，这确实是一个好主意。
+此外，如果您自己正在测试 DirectX 11 功能，并且没有支持 DirectX 11 的显卡，那么您可以使用 `D3D_DRIVER_TYPE_REFERENCE` 替换 `D3D_DRIVER_TYPE_HARDWARE`，DirectX 将使用您的 CPU 而不是显卡硬件进行绘图。请注意，这会导致运行速度变为使用显卡硬件的 1/1000，但对于那些尚未在机器上安装 DirectX 11 显卡的人来说，这确实是一个好主意。
 
 ```cpp
 	// Create the swap chain, Direct3D device, and Direct3D device context.
@@ -537,7 +537,7 @@ bool D3DClass::Initialize(int screenWidth, int screenHeight, bool vsync, HWND hw
 	}
 ```
 
-有时，如果主显卡与 DirectX 11 不兼容，则创建设备的调用将失败。有些机器可能将主卡作为 DirectX 10 视频卡，将辅助卡作为 DirectX 11 视频卡。此外，一些混合显卡也是这样工作的，主显卡是低功耗 Intel 卡，辅助显卡是高功耗 Nvidia 卡。要解决这个问题，你需要枚举机器中的所显卡，而不是使用默认设备，让用户选择要使用的显卡，然后在创建设备时指定该显卡。
+有时，如果主显卡与 DirectX 11 不兼容，则创建设备的调用将失败。有些机器可能将主卡作为 DirectX 10 显卡，将辅助卡作为 DirectX 11 显卡。此外，一些混合显卡也是这样工作的，主显卡是低功耗 Intel 卡，辅助显卡是高功耗 Nvidia 卡。要解决这个问题，你需要枚举机器中的所显卡，而不是使用默认设备，让用户选择要使用的显卡，然后在创建设备时指定该显卡。
 
 现在我们有了交换链，我们需要得到一个指向后缓冲区的指针，然后将其附加到交换链上。我们将使用 `CreateRenderTargetView` 函数将后缓冲区附加到交换链。
 
@@ -891,7 +891,7 @@ void D3DClass::GetOrthoMatrix(XMMATRIX& orthoMatrix)
 }
 ```
 
-最后一个辅助函数将返回显卡的名称和显存量，了解视频卡名称有助于在不同配置上进行调试。
+最后一个辅助函数将返回显卡的名称和显存量，了解显卡名称有助于在不同配置上进行调试。
 
 ```cpp
 void D3DClass::GetVideoCardInfo(char* cardName, int& memory)
